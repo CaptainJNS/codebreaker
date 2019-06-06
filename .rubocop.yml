@@ -9,3 +9,9 @@ Style/Documentation:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Metrics/ParameterLists:
+  Max: 10
+
+Metrics/BlockLength:
+  Max: 40
