@@ -2,8 +2,7 @@ class Console
   class << self
     def run(text = '')
       puts text
-      puts 'Choose one of next scenarios "start", "rules", "stats", "exit"'
-      puts 'Make your choice'
+      puts 'Choose one of next scenarios: "start", "rules", "stats", "exit"'
 
       case gets.chomp
       when 'start' then start
@@ -15,6 +14,7 @@ class Console
     end
 
     def start
+      Game.start
     end
 
     def rules

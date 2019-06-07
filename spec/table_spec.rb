@@ -1,3 +1,4 @@
+require_relative 'spec_helper'
 require_relative '../game/table'
 
 RSpec.describe Table do

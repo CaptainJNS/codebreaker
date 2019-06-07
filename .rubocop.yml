@@ -20,3 +20,6 @@ Metrics/BlockLength:
 
 RSpec/ExampleLength:
   Max: 25
+
+Metrics/BlockNesting:
+    Max: 4

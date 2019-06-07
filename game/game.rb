@@ -1,17 +1,97 @@
 class Game
   class << self
     include Validation
+    include GameLogic
 
-    def run
-      @win = false
+    def start
+      game_registration
+      @secret = make_number.to_s
+      game_process(@secret)
       game_summary
     end
 
+    private
+
+    def game_process(secret)
+      unused_hints = secret.chars
+      while @attempts.positive?
+        puts "Secret code is #{secret}"
+        puts "#{@attempts} attempts and #{@hints} hints left. Guess a secret code"
+        prompt = gets.chomp
+        case prompt
+        when 'exit' then exit!
+        when 'hint' then puts(use_hint(unused_hints))
+        else
+          if guess_is_valid?(prompt)
+            result = check_numbers(secret, prompt)
+            puts(result)
+            break if result == '++++'
+
+            @attempts -= 1
+          else
+            puts 'You have passed unexpected command or incorrect number.'
+          end
+        end
+      end
+      puts 'Game Over'
+    end
+
     def game_registration
+      @name = prompt_name
+      difficulty_set(choose_difficulty)
     end
 
     def game_summary
-      puts(win ? 'Congratulations!' : 'Sorry, maybe another time.')
+      puts "The secret code was #{@secret}"
+      if @attempts.positive?
+        puts 'Congratulations! You win!'
+        print 'Print "save" if you want to save your result: '
+        save_results if gets.chomp == 'save'
+      else
+        'Sorry, you loose. Maybe another time.'
+      end
+    end
+
+    def save_results
+    end
+
+    def choose_difficulty(text = '')
+      puts text
+      puts 'Choose difficulty: easy, medium, hard, HELL'
+      case gets.chomp
+      when 'exit' then exit!
+      when 'easy' then 1
+      when 'medium' then 2
+      when 'hard' then 3
+      when 'HELL' then 4
+      else choose_difficulty('You have passed unexpected command. Please choose one from listed commands')
+      end
+    end
+
+    def difficulty_set(difficulty)
+      case difficulty
+      when 1
+        @attempts = 15
+        @hints = 3
+      when 2
+        @attempts = 10
+        @hints = 2
+      when 3
+        @attempts = 5
+        @hints = 1
+      when 4
+        @attempts = 3
+        @hints = 0
+      end
+    end
+
+    def use_hint(unused_hints)
+      if @hints.positive?
+        @hints -= 1
+        hint(unused_hints)
+      else
+        'You have no hints'
+      end
     end
 
     def prompt_name(text = '')
