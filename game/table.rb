@@ -1,3 +1,11 @@
+class Table
+  attr_accessor :rows
+
+  def initialize(rows: [])
+    @rows = rows
+  end
+end
+
 class TableRow
   attr_accessor :name, :difficulty, :att_total, :att_used, :hints_total, :hints_used
 

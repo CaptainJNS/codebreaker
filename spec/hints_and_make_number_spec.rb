@@ -17,7 +17,7 @@ RSpec.describe 'Hints' do
   end
 
   it 'should be unique' do
-    unused_hints.should !include(hint(unused_hints))
+    unused_hints.should_not include(hint(unused_hints))
   end
 end
 
