@@ -17,9 +17,4 @@ class TableRow
     @hints_total = hints_total
     @hints_used = hints_used
   end
-
-  # maybe it must be in another class/module
-  def valid?(name)
-    name.is_a?(String) && name.length >= 3 && name.length <= 20
-  end
 end
