@@ -4,8 +4,8 @@ class Console
       puts text
       puts 'Choose one of next scenarios "start", "rules", "stats", "exit"'
       puts 'Make your choice'
-      choice = gets.chomp
-      case choice
+
+      case gets.chomp
       when 'start' then start
       when 'rules' then rules
       when 'stats' then stats

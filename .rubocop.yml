@@ -1,3 +1,5 @@
+require: rubocop-rspec
+
 Metrics/LineLength:
   Max: 120
 
@@ -15,3 +17,6 @@ Metrics/ParameterLists:
 
 Metrics/BlockLength:
   Max: 40
+
+RSpec/ExampleLength:
+  Max: 25

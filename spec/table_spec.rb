@@ -1,9 +1,9 @@
 require_relative '../game/table'
 
-RSpec.describe 'Table' do
+RSpec.describe Table do
   test = 'test'
 
-  it 'should have no errors' do
+  it 'has no errors' do
     row = TableRow.new(
       name: test,
       difficulty: test,
@@ -13,7 +13,7 @@ RSpec.describe 'Table' do
       hints_used: test
     )
 
-    Table.new(rows: [row] * 3)
-    Table.new
+    described_class.new(rows: [row] * 3)
+    described_class.new
   end
 end
