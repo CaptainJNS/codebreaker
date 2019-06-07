@@ -1,4 +1,4 @@
-require_relative '../dependency'
+require_relative '../game/game_logic'
 
 RSpec.describe 'Numbers check' do
   include GameLogic
