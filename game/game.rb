@@ -16,7 +16,6 @@ class Game
     def game_process(secret)
       unused_hints = secret.chars
       while @attempts.positive?
-        puts "Secret code is #{secret}"
         puts "#{@attempts} attempts and #{@hints} hints left. Guess a secret code"
         prompt = gets.chomp
         case prompt

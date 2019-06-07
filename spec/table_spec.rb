@@ -1,5 +1,5 @@
 require_relative 'spec_helper'
-require_relative '../game/table'
+require_relative '../dependency'
 
 RSpec.describe Table do
   test = 'test'
