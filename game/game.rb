@@ -6,7 +6,7 @@ class Game
     def start
       game_registration
       @win = false
-      @secret = make_number.to_s
+      @secret = make_number
       game_process(@secret)
       game_summary
     end
@@ -24,6 +24,7 @@ class Game
         when 'hint' then puts(use_hint(unused_hints))
         else result = check(prompt)
         end
+        puts result
         if result == '++++'
           @win = true
           break
@@ -35,7 +36,7 @@ class Game
     def check(prompt)
       if guess_is_valid?(prompt)
         @attempts -= 1
-        check_numbers(secret, prompt)
+        check_numbers(@secret, prompt)
       else
         'You have passed unexpected command or incorrect number.'
       end

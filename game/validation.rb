@@ -4,6 +4,6 @@ module Validation
   end
 
   def guess_is_valid?(guess)
-    guess.to_i.between?(1111, 6666)
+    /^[1-6]{4}$/.match?(guess)
   end
 end

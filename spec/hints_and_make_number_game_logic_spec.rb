@@ -24,10 +24,9 @@ RSpec.describe GameLogic do
   end
 
   describe '#make_number' do
-    it 'is a number between 1111 and 6666' do
+    it 'is a number of 4 digits, each digit is in the range 1-6' do
       secret_code = make_number
-      secret_code.should be >= 1111
-      secret_code.should be <= 6666
+      /^[1-6]{4}$/.match?(secret_code).should be true
     end
   end
 end

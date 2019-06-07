@@ -1,8 +1,6 @@
 module GameLogic
   def make_number(chars = 4, numbers = 6)
-    left_edge = ('1' * chars).to_i
-    right_edge = (numbers.to_s * chars).to_i
-    rand(left_edge..right_edge)
+    (1..chars).map { (1..numbers).to_a.sample }.join
   end
 
   def check_numbers(secret, numbers)
