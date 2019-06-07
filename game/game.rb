@@ -7,14 +7,14 @@ class Game
       game_registration
       @win = false
       @secret = make_number
-      game_process(@secret)
+      game_process
       game_summary
     end
 
     private
 
-    def game_process(secret)
-      unused_hints = secret.chars
+    def game_process
+      unused_hints = @secret.chars
       while @attempts.positive?
         puts "#{@attempts} attempts and #{@hints} hints left. Guess a secret code"
         prompt = gets.chomp
