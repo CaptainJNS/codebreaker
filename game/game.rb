@@ -5,6 +5,7 @@ class Game
 
     def start
       game_registration
+      @win = false
       @secret = make_number.to_s
       game_process(@secret)
       game_summary
@@ -21,19 +22,23 @@ class Game
         case prompt
         when 'exit' then exit!
         when 'hint' then puts(use_hint(unused_hints))
-        else
-          if guess_is_valid?(prompt)
-            result = check_numbers(secret, prompt)
-            puts(result)
-            break if result == '++++'
-
-            @attempts -= 1
-          else
-            puts 'You have passed unexpected command or incorrect number.'
-          end
+        else result = check(prompt)
+        end
+        if result == '++++'
+          @win = true
+          break
         end
       end
       puts 'Game Over'
+    end
+
+    def check(prompt)
+      if guess_is_valid?(prompt)
+        @attempts -= 1
+        check_numbers(secret, prompt)
+      else
+        'You have passed unexpected command or incorrect number.'
+      end
     end
 
     def game_registration
@@ -43,7 +48,7 @@ class Game
 
     def game_summary
       puts "The secret code was #{@secret}"
-      if @attempts.positive?
+      if @win
         puts 'Congratulations! You win!'
         print 'Print "save" if you want to save your result: '
         save_results if gets.chomp == 'save'
