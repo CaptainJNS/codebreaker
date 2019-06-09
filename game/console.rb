@@ -5,7 +5,7 @@ class Console
 
     def run
       loop do
-        puts 'Choose one of next scenarios: "start", "rules", "stats", "exit"'
+        puts I18n.t(:menu)
         case gets.chomp
         when 'start' then break start
         when 'rules' then rules
@@ -23,7 +23,7 @@ class Console
     end
 
     def rules
-      puts 'THIS IS RULES'
+      puts I18n.t(:rules)
     end
 
     def stats
@@ -31,29 +31,29 @@ class Console
     end
 
     def close
-      puts 'Goodbye!'
+      puts I18n.t(:goodbye)
       exit
     end
 
     def wrong_input(from)
       wrong_input_hash = {
-        choose_difficulty: 'There is no such difficulty. Please choose one from listed',
-        game_process: 'There is no such command or your number is invalid. You can try use hint or exit',
-        choose_name: 'Choosen name is invalid. Please choose another one',
-        run: 'You have passed unexpected command. Please choose one from listed commands'
+        choose_difficulty: I18n.t(:wrong_difficulty),
+        game_process: I18n.t(:wrong_process),
+        choose_name: I18n.t(:wrong_name),
+        run: I18n.t(:wrong_run)
       }
       puts wrong_input_hash[from]
     end
 
     def choose_difficulty
       loop do
-        puts 'Choose difficulty: easy, medium, hard, HELL'
+        puts I18n.t(:choose_difficulty)
         case gets.chomp
         when 'exit' then break close
-        when 'easy' then break 'Easy'
-        when 'medium' then break 'Medium'
-        when 'hard' then break 'Hard'
-        when 'HELL' then break 'HELL'
+        when 'easy' then break I18n.t(:easy)
+        when 'medium' then break I18n.t(:medium)
+        when 'hard' then break I18n.t(:hard)
+        when 'HELL' then break I18n.t(:hell)
         else wrong_input(__method__)
         end
       end
@@ -61,7 +61,7 @@ class Console
 
     def choose_name
       loop do
-        puts 'Choose your name'
+        puts I18n.t(:choose_name)
         name = gets.chomp
         break close if name == 'exit'
         break name if name_is_valid?(name)
@@ -77,7 +77,7 @@ class Console
     def game_process
       loop do
         # puts "Secret code is #{@game.secret}"
-        puts "#{@game.attempts} attempts and #{@game.hints} hints left. Guess a secret code"
+        puts I18n.t(:game_process, attempts: @game.attempts, hints: @game.hints)
         input = gets.chomp
         case input
         when 'exit' then break close
@@ -88,17 +88,17 @@ class Console
         puts @game.check(input)
         break if @game.attempts.zero? || @game.win
       end
-      puts 'Game Over'
+      puts I18n.t(:game_over)
     end
 
     def game_summary
-      puts "The secret code was #{@game.secret}"
+      puts I18n.t(:secret, secret: @game.secret)
       if @game.win
-        puts 'Congratulations! You win!'
-        print 'Print "save" if you want to save your result: '
+        puts I18n.t(:win)
+        print I18n.t(:save)
         save_results if gets.chomp == 'save'
       else
-        puts 'Sorry, you lose. Maybe another time.'
+        puts I18n.t(:lose)
       end
     end
 

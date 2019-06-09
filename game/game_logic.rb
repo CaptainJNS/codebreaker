@@ -25,20 +25,20 @@ module GameLogic
 
   def calc_attempts(difficulty)
     difficulty_hash = {
-      'Easy' => 3,
-      'Medium' => 2,
-      'Hard' => 1,
-      'HELL' => 0
+      I18n.t(:easy) => 3,
+      I18n.t(:medium) => 2,
+      I18n.t(:hard) => 1,
+      I18n.t(:hell) => 0
     }
-    difficulty == 'HELL' ? 3 : difficulty_hash[difficulty] * 5
+    difficulty == I18n.t(:hell) ? 3 : difficulty_hash[difficulty] * 5
   end
 
   def calc_hints(difficulty)
     difficulty_hash = {
-      'Easy' => 3,
-      'Medium' => 2,
-      'Hard' => 1,
-      'HELL' => 0
+      I18n.t(:easy) => 3,
+      I18n.t(:medium) => 2,
+      I18n.t(:hard) => 1,
+      I18n.t(:hell) => 0
     }
     difficulty_hash[difficulty]
   end

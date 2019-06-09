@@ -3,7 +3,7 @@ require_relative '../dependency'
 
 RSpec.describe DataUtils do
   include described_class
-  path = 'rspec_test_data.yaml'.freeze
+  let(:path) {'rspec_test_data.yaml'}
 
   summary = {
     name: 'Rspec',

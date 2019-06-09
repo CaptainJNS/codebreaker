@@ -8,7 +8,7 @@ RSpec.describe Console do
 
   describe '.rules' do
     it 'shows the rules' do
-      expect { described_class.send(:rules) }.to output("THIS IS RULES\n").to_stdout
+      expect { described_class.send(:rules) }.to output(I18n.t(:rules)).to_stdout
     end
   end
 
@@ -36,7 +36,7 @@ RSpec.describe Console do
   describe '.close' do
     it 'says goodbye' do
       allow(described_class).to receive(:exit)
-      expect { described_class.send(:close) }.to output("Goodbye!\n").to_stdout
+      expect { described_class.send(:close) }.to output(I18n.t(:goodbye)).to_stdout
     end
 
     it 'closes' do

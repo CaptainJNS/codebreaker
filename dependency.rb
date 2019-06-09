@@ -1,3 +1,5 @@
+require 'i18n'
+require_relative './i18n'
 require_relative './game/validation'
 require_relative './game/data_utils'
 require_relative './game/console'

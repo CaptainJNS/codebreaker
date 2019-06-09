@@ -25,7 +25,7 @@ class Game
       @hints -= 1
       hint(@unused_hints)
     else
-      'You have no hints'
+      I18n.t(:no_hints)
     end
   end
 end
