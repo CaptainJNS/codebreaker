@@ -23,11 +23,12 @@ RSpec.describe Game do
       described_class.send(:choose_difficulty).should eq('HELL')
     end
 
-    # it 'closes' do
-    #   described_class.stub(:gets).and_return("exit\n")
-    #   described_class.send(:choose_difficulty)
-    #   expect(described_class).to receive(:close)
-    # end
+    it 'closes' do
+      allow(described_class).to receive(:exit)
+      described_class.stub(:gets).and_return("exit\n")
+      expect(described_class).to receive(:close)
+      described_class.send(:choose_difficulty)
+    end
   end
 
   describe '#game_process' do
@@ -46,17 +47,19 @@ RSpec.describe Game do
     end
 
     # it 'closes' do
+    #   # allow(described_class).to receive(:loop).and_yield
+    #   allow(described_class).to receive_message_chain(:gets, :chomp).and_return('exit')
     #   described_class.instance_variable_set(:@attempts, 1)
-    #   described_class.stub(:gets).and_return("exit\n")
-    #   described_class.send(:game_process)
     #   expect(described_class).to receive(:close)
+    #   described_class.send(:game_process)
     # end
 
     # it 'calls a hint' do
+    #   allow(described_class).to receive(:use_hint)
     #   described_class.instance_variable_set(:@attempts, 1)
     #   described_class.stub(:gets).and_return("hint\n")
-    #   described_class.send(:game_process)
     #   expect(described_class).to receive(:use_hint)
+    #   described_class.send(:game_process)
     # end
   end
 
