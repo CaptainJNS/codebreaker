@@ -17,11 +17,9 @@ class Console
       Game.start
     end
 
-    def rules
-    end
+    def rules; end
 
-    def stats
-    end
+    def stats; end
 
     def exit
       puts 'Goodbye!'

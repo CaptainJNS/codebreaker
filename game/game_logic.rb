@@ -1,6 +1,6 @@
 module GameLogic
   def make_number(chars = 4, numbers = 6)
-    (1..chars).map { (1..numbers).to_a.sample }.join
+    (1..chars).map { rand(1..numbers) }.join
   end
 
   def check_numbers(secret, numbers)
