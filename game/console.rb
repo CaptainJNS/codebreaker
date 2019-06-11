@@ -75,8 +75,8 @@ class Console
     end
 
     def game_process
-      while @game.attempts.positive? && !@game.win
-        puts "Secret code is #{@game.secret}"
+      loop do
+        # puts "Secret code is #{@game.secret}"
         puts "#{@game.attempts} attempts and #{@game.hints} hints left. Guess a secret code"
         input = gets.chomp
         case input
@@ -86,6 +86,7 @@ class Console
         end
 
         puts @game.check(input)
+        break if @game.attempts.zero? || @game.win
       end
       puts 'Game Over'
     end

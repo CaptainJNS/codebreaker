@@ -3,8 +3,7 @@ require_relative '../dependency'
 
 RSpec.describe DataUtils do
   include described_class
-  path = 'SEED.yaml'.freeze
-  File.new(path, 'a').close unless File.exist?(path)
+  path = 'rspec_test_data.yaml'.freeze
 
   summary = {
     name: 'Rspec',
@@ -16,24 +15,33 @@ RSpec.describe DataUtils do
   }
 
   describe '#save' do
+    before do
+      File.new(path, 'a') unless File.exist?(path)
+    end
+
+    after do
+      File.delete(path) if File.exist?(path)
+    end
+
     it 'saves a Table object to exists file' do
       old_size = File.new(path).size
       save(summary, path)
       new_size = File.new(path).size
-      new_size.should be > old_size
+      expect(new_size).to be > old_size
     end
 
     it 'saves a Table object to a new file' do
-      new_file = 'new_file.yaml'
-      File.delete(new_file) if File.exist?(new_file)
-      save(summary, new_file)
-      File.exist?(new_file)
+      File.delete(path) if File.exist?(path)
+      save(summary, path)
+      expect(File.exist?(path)).to eq(true)
     end
   end
 
   describe '#load' do
     it 'loads a Table class object from file' do
-      load(path).is_a?(Table) if File.exist?(path)
+      save(summary, path)
+      expect(load(path).is_a?(Table)).to eq(true)
+      File.delete(path)
     end
   end
 end
