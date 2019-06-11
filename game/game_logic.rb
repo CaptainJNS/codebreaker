@@ -22,4 +22,24 @@ module GameLogic
   def hint(secrets)
     secrets.shuffle!.pop
   end
+
+  def calc_attempts(difficulty)
+    difficulty_hash = {
+      'Easy' => 3,
+      'Medium' => 2,
+      'Hard' => 1,
+      'HELL' => 0
+    }
+    difficulty == 'HELL' ? 3 : difficulty_hash[difficulty] * 5
+  end
+
+  def calc_hints(difficulty)
+    difficulty_hash = {
+      'Easy' => 3,
+      'Medium' => 2,
+      'Hard' => 1,
+      'HELL' => 0
+    }
+    difficulty_hash[difficulty]
+  end
 end
