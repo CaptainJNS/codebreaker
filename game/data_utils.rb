@@ -13,7 +13,7 @@ module DataUtils
   def save(summary, path = SEED)
     row = [TableRow.new(summary)]
     if File.exist?(path)
-      data = load
+      data = load(path)
       data.rows.push(row)
     else
       data = Table.new(rows: [row])

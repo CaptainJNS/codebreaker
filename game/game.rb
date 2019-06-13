@@ -21,11 +21,9 @@ class Game
   end
 
   def use_hint
-    if @hints.positive?
-      @hints -= 1
-      hint(@unused_hints)
-    else
-      I18n.t(:no_hints)
-    end
+    return I18n.t(:no_hints) unless @hints.positive?
+
+    @hints -= 1
+    hint(@unused_hints)
   end
 end

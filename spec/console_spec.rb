@@ -74,7 +74,7 @@ RSpec.describe Console do
     it 'shows a message' do
       allow(STDOUT).to receive(:puts).with(anything)
       allow(described_class).to receive(:gets).and_return('wrong input')
-      expect(STDOUT).to receive(:puts).with('You have passed unexpected command. Please choose one from listed commands')
+      expect(STDOUT).to receive(:puts).with(I18n.t(:wrong_run))
       described_class.send(:run)
     end
   end
@@ -90,16 +90,16 @@ RSpec.describe Console do
     it 'shows a message' do
       allow(STDOUT).to receive(:puts).with(anything)
       allow(described_class).to receive(:gets).and_return('wrong input')
-      expect(STDOUT).to receive(:puts).with('There is no such difficulty. Please choose one from listed')
+      expect(STDOUT).to receive(:puts).with(I18n.t(:wrong_difficulty))
       described_class.choose_difficulty
     end
 
     it 'returns a correct difficulty level' do
       {
-        'easy' => 'Easy',
-        'medium' => 'Medium',
-        'hard' => 'Hard',
-        'HELL' => 'HELL'
+        'easy' => I18n.t(:easy),
+        'medium' => I18n.t(:medium),
+        'hard' => I18n.t(:hard),
+        'HELL' => I18n.t(:hell)
       }.each_pair do |input, output|
         allow(described_class).to receive(:gets).and_return(input)
         expect(described_class.choose_difficulty).to eq(output)
@@ -118,7 +118,7 @@ RSpec.describe Console do
     it 'shows a message' do
       allow(STDOUT).to receive(:puts).with(anything)
       allow(described_class).to receive(:gets).and_return('')
-      expect(STDOUT).to receive(:puts).with('Choosen name is invalid. Please choose another one')
+      expect(STDOUT).to receive(:puts).with(I18n.t(:wrong_name))
       described_class.choose_name
     end
 
@@ -139,7 +139,7 @@ RSpec.describe Console do
   describe '.game_process' do
     before do
       allow(described_class).to receive(:loop).and_yield
-      described_class.instance_variable_set(:@game, Game.new(name: 'Rspec', difficulty: 'Easy'))
+      described_class.instance_variable_set(:@game, Game.new(name: 'Rspec', difficulty: I18n.t(:easy)))
     end
 
     after do
@@ -166,7 +166,7 @@ RSpec.describe Console do
     it 'shows a message' do
       allow(STDOUT).to receive(:puts).with(anything)
       allow(described_class).to receive(:gets).and_return('wrong input')
-      expect(STDOUT).to receive(:puts).with('There is no such command or your number is invalid. You can try use hint or exit')
+      expect(STDOUT).to receive(:puts).with(I18n.t(:wrong_process))
     end
 
     it 'calls a check method from Game class' do
@@ -177,7 +177,7 @@ RSpec.describe Console do
 
   describe '.game_summary' do
     before do
-      described_class.instance_variable_set(:@game, Game.new(name: 'Rspec', difficulty: 'Easy'))
+      described_class.instance_variable_set(:@game, Game.new(name: 'Rspec', difficulty: I18n.t(:easy)))
     end
 
     after do
@@ -186,27 +186,29 @@ RSpec.describe Console do
 
     it 'shows a lose message' do
       allow(STDOUT).to receive(:puts).with(anything)
-      expect(STDOUT).to receive(:puts).with('Sorry, you lose. Maybe another time.')
+      expect(STDOUT).to receive(:puts).with(I18n.t(:lose))
     end
 
-    # it 'shows a win message' do
-    #   described_class.instance_variable_set(:@game.win, true)
-    #   allow(STDOUT).to receive(:puts).with(anything)
-    #   expect(STDOUT).to receive(:puts).with('Congratulations! You win!')
-    # end
+    it 'shows a win message' do
+      described_class.instance_variable_get(:@game).instance_variable_set(:@win, true)
+      allow(STDOUT).to receive(:puts).with(anything)
+      allow(described_class).to receive(:gets).and_return("no\n")
+      expect(STDOUT).to receive(:puts).with(I18n.t(:win))
+    end
 
-    # it 'calls save_results method' do
-    #   described_class.instance_variable_set(:@game.win, true)
-    #   described_class.stub(:gets).and_return("save\n")
-    #   expect(described_class).to receive(:save_results)
-    # end
+    it 'calls save_results method' do
+      described_class.instance_variable_get(:@game).instance_variable_set(:@win, true)
+      allow(described_class).to receive(:gets).and_return("save\n")
+      expect(described_class).to receive(:save_results)
+    end
   end
 
-  # describe '.save_results' do
-  #   it 'calls a save method from DataUtils' do
-  #     described_class.instance_variable_set(:@game, Game.new(name: 'Rspec', difficulty: 'Easy'))
-  #     expect(DataUtils).to receive(:save)
-  #     described_class.save_results
-  #   end
-  # end
+  describe '.save_results' do
+    it 'calls a save method from DataUtils' do
+      described_class.instance_variable_set(:@game, Game.new(name: 'Rspec', difficulty: 'Easy'))
+      expect(DataUtils).to receive(:save)
+      # expect(described_class).to receive(DataUtils::save)
+      described_class.save_results
+    end
+  end
 end

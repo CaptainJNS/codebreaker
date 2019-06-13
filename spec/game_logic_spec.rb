@@ -5,44 +5,13 @@ RSpec.describe GameLogic do
   include described_class
 
   describe '.check_numbers' do
-    it 'returns a correct answer' do
-      test_data = [
-        ['6543', '5643', '++--'],
-        ['6543', '6411', '+-'],
-        ['6543', '6544', '+++'],
-        ['6543', '3456', '----'],
-        ['6543', '6666', '+'],
-        ['6543', '2666', '-'],
-        ['6543', '2222', ''],
-        ['6666', '1661', '++'],
-        ['1234', '3124', '+---'],
-        ['1234', '1524', '++-'],
-        ['1234', '1234', '++++']
-      ]
+    let(:samples) { YAML.load_file('./spec/samples.yml') }
 
-      test_data.each { |test_case| expect(check_numbers(test_case[0], test_case[1])).to eq(test_case[2]) }
+    it 'returns a correct answer' do      
+      samples.each do |sample|
+        expect(check_numbers(sample[0], sample[1])).to eq(sample[2])
+      end
     end
-    # it { expect(check_numbers('6543', '5643')).to eq('++--') }
-
-    # it { expect(check_numbers('6543', '6411')).to eq('+-') }
-
-    # it { expect(check_numbers('6543', '6544')).to eq('+++') }
-
-    # it { expect(check_numbers('6543', '3456')).to eq('----') }
-
-    # it { expect(check_numbers('6543', '6666')).to eq('+') }
-
-    # it { expect(check_numbers('6543', '2666')).to eq('-') }
-
-    # it { expect(check_numbers('6543', '2222')).to eq('') }
-
-    # it { expect(check_numbers('6666', '1661')).to eq('++') }
-
-    # it { expect(check_numbers('1234', '3124')).to eq('+---') }
-
-    # it { expect(check_numbers('1234', '1524')).to eq('++-') }
-
-    # it { expect(check_numbers('1234', '1234')).to eq('++++') }
   end
 
   describe '.hint' do

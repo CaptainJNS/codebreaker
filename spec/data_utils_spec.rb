@@ -15,12 +15,11 @@ RSpec.describe DataUtils do
   }
 
   describe '#save' do
-    before do
+    it 'saves a Table object to a new file' do
       File.new(path, 'a') unless File.exist?(path)
-    end
-
-    after do
       File.delete(path) if File.exist?(path)
+      save(summary, path)
+      expect(File.exist?(path)).to eq(true)
     end
 
     it 'saves a Table object to exists file' do
@@ -28,12 +27,7 @@ RSpec.describe DataUtils do
       save(summary, path)
       new_size = File.new(path).size
       expect(new_size).to be > old_size
-    end
-
-    it 'saves a Table object to a new file' do
       File.delete(path) if File.exist?(path)
-      save(summary, path)
-      expect(File.exist?(path)).to eq(true)
     end
   end
 

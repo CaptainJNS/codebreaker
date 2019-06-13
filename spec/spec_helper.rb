@@ -1,4 +1,6 @@
 require 'simplecov'
+require 'pry'
+require 'yaml'
 
 SimpleCov.start do
   add_filter '/spec/'
