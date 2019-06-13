@@ -206,8 +206,7 @@ RSpec.describe Console do
   describe '.save_results' do
     it 'calls a save method from DataUtils' do
       described_class.instance_variable_set(:@game, Game.new(name: 'Rspec', difficulty: 'Easy'))
-      expect(DataUtils).to receive(:save)
-      # expect(described_class).to receive(DataUtils::save)
+      expect(described_class).to receive(:save)
       described_class.save_results
     end
   end
