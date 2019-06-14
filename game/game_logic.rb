@@ -11,25 +11,16 @@ module GameLogic
   end
 
   def check_numbers(secret, numbers)
-    result = []
-    secrets = String.new(secret)
-    indexes = []
+    secret = secret.split('')
+    numbers = numbers.split('')
+    minuses = (secret & numbers).map{|element| element = [secret.count(element), numbers.count(element)].min}.sum
+    result = '-' * minuses
 
-    numbers.each_char.with_index do |number, index|
-      if number == secrets[index]
-        result.unshift(secrets[index] = '+')
-        indexes.push(index)
-      end
+    numbers.each.with_index do |number, index|
+      result.sub!('-', '+') if number == secret[index]
     end
 
-    numbers.each_char.with_index do |number, index|
-      if secrets.include?(number) && !indexes.include?(index)
-        secrets.sub!(number, '*')
-        result.push('-')
-      end
-    end
-
-    result.join
+    result
   end
 
   def hint(secrets)

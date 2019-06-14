@@ -2,6 +2,7 @@ class GameConsole
   include Validation
   include DataUtils
   include GameLogic
+  include Output
 
   def initialize(name, difficulty)
     @game = Game.new(name: name, difficulty: difficulty)
@@ -11,28 +12,28 @@ class GameConsole
     loop do
       break if @game.attempts.zero? || @game.win
 
-      puts I18n.t(:game_process, attempts: @game.attempts, hints: @game.hints)
+      start_output(@game.attempts, @game.hints)
       input = gets.chomp
       case input
       when 'exit' then break close
-      when 'hint' then next puts(@game.use_hint)
-      else next puts(I18n.t(:wrong_process)) unless guess_is_valid?(input)
+      when 'hint' then next hint_output(@game.use_hint)
+      else next wrong_process_output unless guess_is_valid?(input)
       end
 
-      puts @game.check(input)
+      check_output(@game.check(input))
     end
-    puts I18n.t(:game_over)
+    game_over_output
     game_summary
   end
 
   def game_summary
-    puts I18n.t(:secret, secret: @game.secret)
+    summary_output(@game.secret)
     if @game.win
-      puts I18n.t(:win)
-      print I18n.t(:save)
+      win_output
+      save_output
       save_results if gets.chomp == 'save'
     else
-      puts I18n.t(:lose)
+      lose_output
     end
   end
 
@@ -51,7 +52,7 @@ class GameConsole
   end
 
   def close
-    puts I18n.t(:goodbye)
+    goodbye_output
     exit
   end
 end

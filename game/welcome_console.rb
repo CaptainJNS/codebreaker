@@ -3,19 +3,20 @@ class WelcomeConsole
     include Validation
     include DataUtils
     include GameLogic
+    include Output
 
     def welcome
-      puts(I18n.t(:greeting))
+      welcome_output
       run
     end
 
     def run
       loop do
-        puts I18n.t(:menu)
+        menu_output
         case gets.chomp
         when 'start' then break registration
         when 'rules' then rules
-        when 'stats' then puts stats
+        when 'stats' then stats
         when 'exit' then break close
         else wrong_input(__method__)
         end
@@ -29,7 +30,7 @@ class WelcomeConsole
 
     def choose_name
       loop do
-        puts I18n.t(:choose_name)
+        name_output
         name = gets.chomp
         break close if name == 'exit'
 
@@ -41,7 +42,7 @@ class WelcomeConsole
 
     def choose_difficulty
       loop do
-        puts I18n.t(:choose_difficulty)
+        difficulty_output
         case gets.chomp
         when 'exit' then break close
         when 'easy' then break I18n.t(:easy)
@@ -54,15 +55,15 @@ class WelcomeConsole
     end
 
     def rules
-      puts I18n.t(:rules)
+      rules_output
     end
 
     def stats
-      return puts(I18n.t(:no_stats)) unless File.exist?('SEED.yaml')
+      return no_stats_output unless File.exist?('SEED.yaml')
 
       table = load.sort_by { |row| [row.hints_total, row.att_used] }
       table.map { |row| row.difficulty = DIFFICULTY_HASH.key([row.att_total, row.hints_total]) }
-      puts table
+      table_output(table)
     end
 
     def wrong_input(from)
@@ -71,11 +72,11 @@ class WelcomeConsole
         choose_name: I18n.t(:wrong_name),
         run: I18n.t(:wrong_run)
       }
-      puts wrong_input_hash[from]
+      wrong_input_output(wrong_input_hash[from])
     end
 
     def close
-      puts I18n.t(:goodbye)
+      goodbye_output
       exit
     end
   end
