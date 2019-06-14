@@ -1,6 +1,7 @@
 class GameConsole
   include Validation
   include DataUtils
+  include GameLogic
 
   def initialize(name, difficulty)
     @game = Game.new(name: name, difficulty: difficulty)
@@ -10,7 +11,6 @@ class GameConsole
     loop do
       break if @game.attempts.zero? || @game.win
 
-      # puts "Secret code is #{@game.secret}"
       puts I18n.t(:game_process, attempts: @game.attempts, hints: @game.hints)
       input = gets.chomp
       case input
@@ -37,13 +37,15 @@ class GameConsole
   end
 
   def save_results
+    att_total = calc_attempts_and_hints(@game.difficulty)[0]
+    hints_total = calc_attempts_and_hints(@game.difficulty)[1]
     summary = {
       name: @game.name,
       difficulty: @game.difficulty,
-      att_total: @game.att_total,
-      att_used: @game.att_total - @game.attempts,
-      hints_total: @game.hints_total,
-      hints_used: @game.hints_total - @game.hints
+      att_total: att_total,
+      att_used: att_total - @game.attempts,
+      hints_total: hints_total,
+      hints_used: hints_total - @game.hints
     }
     save(summary)
   end

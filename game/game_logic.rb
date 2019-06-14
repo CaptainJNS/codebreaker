@@ -36,11 +36,7 @@ module GameLogic
     secrets.shuffle!.pop
   end
 
-  def calc_attempts(difficulty)
-    DIFFICULTY_HASH[difficulty][0]
-  end
-
-  def calc_hints(difficulty)
-    DIFFICULTY_HASH[difficulty][1]
+  def calc_attempts_and_hints(difficulty)
+    DIFFICULTY_HASH[difficulty]
   end
 end

@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 require_relative '../dependency'
 
 RSpec.describe TableRow do
-  test = 'test'
+  let(:test) { 'test' }
 
   it 'shows correctly' do
     row = described_class.new(
@@ -15,7 +15,7 @@ RSpec.describe TableRow do
     )
     expect(row.to_s).to eq(I18n.t(:stats,
                                   name: test,
-                                  difficulty: '',
+                                  difficulty: test,
                                   att_total: test,
                                   att_used: test,
                                   hints_total: test,

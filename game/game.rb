@@ -6,8 +6,8 @@ class Game
   def initialize(name:, difficulty:)
     @name = name
     @difficulty = difficulty
-    @att_total = @attempts = calc_attempts(difficulty)
-    @hints_total = @hints = calc_hints(difficulty)
+    @attempts = calc_attempts_and_hints(difficulty)[0]
+    @hints = calc_attempts_and_hints(difficulty)[1]
     @win = false
     @secret = make_number
     @unused_hints = @secret.chars

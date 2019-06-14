@@ -2,12 +2,7 @@ class WelcomeConsole
   class << self
     include Validation
     include DataUtils
-    DIFFICULTY_HASH = {
-      1 => I18n.t(:easy),
-      2 => I18n.t(:medium),
-      3 => I18n.t(:hard),
-      4 => I18n.t(:hell)
-    }.freeze
+    include GameLogic
 
     def welcome
       puts(I18n.t(:greeting))
@@ -28,8 +23,7 @@ class WelcomeConsole
     end
 
     def registration
-      game_console = GameConsole.new(choose_name, choose_difficulty)
-      game_console.start
+      GameConsole.new(choose_name, choose_difficulty).start
       welcome
     end
 
@@ -66,8 +60,8 @@ class WelcomeConsole
     def stats
       return puts(I18n.t(:no_stats)) unless File.exist?('SEED.yaml')
 
-      table = load.sort_by { |row| [-row.difficulty, row.att_used] }
-      table.map { |row| row.difficulty = DIFFICULTY_HASH[row.difficulty] }
+      table = load.sort_by { |row| [row.hints_total, row.att_used] }
+      table.map { |row| row.difficulty = DIFFICULTY_HASH.key([row.att_total, row.hints_total]) }
       puts table
     end
 

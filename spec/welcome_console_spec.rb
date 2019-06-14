@@ -124,7 +124,7 @@ RSpec.describe WelcomeConsole do
     end
 
     it 'calls close method' do
-      described_class.stub(:gets).and_return("exit\n")
+      allow(described_class).to receive(:gets).and_return("exit\n")
       expect(described_class).to receive(:close)
       described_class.choose_name
     end
@@ -137,7 +137,7 @@ RSpec.describe WelcomeConsole do
     end
 
     it 'returns a choosen name' do
-      described_class.stub(:gets).and_return("Name\n")
+      allow(described_class).to receive(:gets).and_return("Name\n")
       expect(described_class.choose_name).to eq('Name')
     end
   end
