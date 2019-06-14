@@ -30,6 +30,7 @@ class WelcomeConsole
     def registration
       game_console = GameConsole.new(choose_name, choose_difficulty)
       game_console.start
+      welcome
     end
 
     def choose_name 
