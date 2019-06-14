@@ -3,11 +3,11 @@ require_relative '../dependency'
 
 RSpec.describe DataUtils do
   include described_class
-  let(:path) {'rspec_test_data.yaml'}
+  let(:path) { 'rspec_test_data.yaml' }
 
   summary = {
     name: 'Rspec',
-    difficulty: 'test',
+    difficulty: 'Easy',
     att_total: 1,
     att_used: 1,
     hints_total: 1,
@@ -15,14 +15,14 @@ RSpec.describe DataUtils do
   }
 
   describe '#save' do
-    it 'saves a Table object to a new file' do
+    it 'saves a TableRow object to a new file' do
       File.new(path, 'a') unless File.exist?(path)
       File.delete(path) if File.exist?(path)
       save(summary, path)
       expect(File.exist?(path)).to eq(true)
     end
 
-    it 'saves a Table object to exists file' do
+    it 'saves a TableRow object to exists file' do
       old_size = File.new(path).size
       save(summary, path)
       new_size = File.new(path).size
@@ -32,9 +32,9 @@ RSpec.describe DataUtils do
   end
 
   describe '#load' do
-    it 'loads a Table class object from file' do
+    it 'loads a TableRow object array from file' do
       save(summary, path)
-      expect(load(path).is_a?(Table)).to eq(true)
+      expect(load(path)[0].is_a?(TableRow)).to eq(true)
       File.delete(path)
     end
   end

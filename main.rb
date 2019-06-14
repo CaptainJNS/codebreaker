@@ -1,3 +1,3 @@
 require_relative './dependency'
 
-Console.run
+WelcomeConsole.run

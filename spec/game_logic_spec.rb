@@ -7,7 +7,7 @@ RSpec.describe GameLogic do
   describe '.check_numbers' do
     let(:samples) { YAML.load_file('./spec/samples.yml') }
 
-    it 'returns a correct answer' do      
+    it 'returns a correct answer' do
       samples.each do |sample|
         expect(check_numbers(sample[0], sample[1])).to eq(sample[2])
       end

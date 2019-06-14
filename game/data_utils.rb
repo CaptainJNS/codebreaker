@@ -2,22 +2,17 @@ module DataUtils
   SEED = 'SEED.yaml'.freeze
 
   def load(path = SEED)
-    Psych.safe_load(
-      File.read(path),
-      [Symbol, Table, TableRow],
-      [],
-      true
-    )
+    YAML.load_file(path)
   end
 
   def save(summary, path = SEED)
-    row = [TableRow.new(summary)]
+    row = TableRow.new(summary)
     if File.exist?(path)
-      data = load(path)
-      data.rows.push(row)
+      table = load(path)
+      table << row
+      File.write(path, table.to_yaml)
     else
-      data = Table.new(rows: [row])
+      File.write(path, [row].to_yaml)
     end
-    File.write(path, data.to_yaml)
   end
 end
