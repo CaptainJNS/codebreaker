@@ -21,5 +21,11 @@ Metrics/BlockLength:
 RSpec/ExampleLength:
   Max: 25
 
-Metrics/BlockNesting:
-    Max: 4
+Metrics/BlockLength:
+  ExcludedMethods: ['describe']
+
+Metrics/AbcSize:
+  Max: 30
+
+RSpec/MessageSpies:
+  Enabled: false

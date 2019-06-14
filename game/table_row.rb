@@ -19,11 +19,11 @@ class TableRow
 
   def to_s
     I18n.t(:stats,
-      name: @name,
-      difficulty: @difficulty,
-      att_total: @att_total,
-      att_used: @att_used,
-      hints_total: @hints_total,
-      hints_used: @hints_used)
+           name: @name,
+           difficulty: @difficulty,
+           att_total: @att_total,
+           att_used: @att_used,
+           hints_total: @hints_total,
+           hints_used: @hints_used)
   end
 end

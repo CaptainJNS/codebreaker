@@ -14,11 +14,11 @@ RSpec.describe TableRow do
       hints_used: test
     )
     expect(row.to_s).to eq(I18n.t(:stats,
-      name: test,
-      difficulty: '',
-      att_total: test,
-      att_used: test,
-      hints_total: test,
-      hints_used: test))
+                                  name: test,
+                                  difficulty: '',
+                                  att_total: test,
+                                  att_used: test,
+                                  hints_total: test,
+                                  hints_used: test))
   end
 end

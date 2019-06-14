@@ -33,8 +33,8 @@ class WelcomeConsole
       welcome
     end
 
-    def choose_name 
-      loop do     
+    def choose_name
+      loop do
         puts I18n.t(:choose_name)
         name = gets.chomp
         break close if name == 'exit'
@@ -46,7 +46,7 @@ class WelcomeConsole
     end
 
     def choose_difficulty
-      loop do   
+      loop do
         puts I18n.t(:choose_difficulty)
         case gets.chomp
         when 'exit' then break close
@@ -56,7 +56,7 @@ class WelcomeConsole
         when 'HELL' then break I18n.t(:hell)
         else wrong_input(__method__)
         end
-      end  
+      end
     end
 
     def rules
@@ -64,8 +64,10 @@ class WelcomeConsole
     end
 
     def stats
-      table = load.sort_by{|row| [-row.difficulty, row.att_used] }
-      table.map {|row| row.difficulty = DIFFICULTY_HASH[row.difficulty]}
+      return puts(I18n.t(:no_stats)) unless File.exist?('SEED.yaml')
+
+      table = load.sort_by { |row| [-row.difficulty, row.att_used] }
+      table.map { |row| row.difficulty = DIFFICULTY_HASH[row.difficulty] }
       puts table
     end
 

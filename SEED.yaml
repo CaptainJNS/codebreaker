@@ -1,0 +1,57 @@
+---
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: 2
+  att_total: 1
+  att_used: 10
+  hints_total: 1
+  hints_used: 1
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: 3
+  att_total: 1
+  att_used: 11
+  hints_total: 1
+  hints_used: 1
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: 4
+  att_total: 1
+  att_used: 1
+  hints_total: 1
+  hints_used: 1
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: 1
+  att_total: 1
+  att_used: 4
+  hints_total: 1
+  hints_used: 1
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: 1
+  att_total: 1
+  att_used: 5
+  hints_total: 1
+  hints_used: 1
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: 2
+  att_total: 1
+  att_used: 6
+  hints_total: 1
+  hints_used: 1
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: 3
+  att_total: 1
+  att_used: 9
+  hints_total: 1
+  hints_used: 1
+- !ruby/object:TableRow
+  name: tetster
+  difficulty: 1
+  att_total: 15
+  att_used: 5
+  hints_total: 3
+  hints_used: 3

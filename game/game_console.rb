@@ -9,6 +9,7 @@ class GameConsole
   def start
     loop do
       break if @game.attempts.zero? || @game.win
+
       # puts "Secret code is #{@game.secret}"
       puts I18n.t(:game_process, attempts: @game.attempts, hints: @game.hints)
       input = gets.chomp

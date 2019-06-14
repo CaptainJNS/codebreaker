@@ -77,7 +77,7 @@ RSpec.describe WelcomeConsole do
       described_class.close
     end
   end
-  
+
   describe '.registration' do
     it 'returns GameConsole start' do
       allow(described_class).to receive(:loop).and_yield
