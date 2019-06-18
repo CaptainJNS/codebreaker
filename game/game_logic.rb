@@ -11,8 +11,6 @@ module GameLogic
   end
 
   def check_numbers(secret, numbers)
-    secret = secret.split('')
-    numbers = numbers.split('')
     minuses = (secret & numbers).map { |element| [secret.count(element), numbers.count(element)].min }.sum
     result = '-' * minuses
 

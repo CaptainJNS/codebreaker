@@ -9,7 +9,7 @@ RSpec.describe GameLogic do
 
     it 'returns a correct answer' do
       samples.each do |sample|
-        expect(dummy_class.check_numbers(sample[0], sample[1])).to eq(sample[2])
+        expect(dummy_class.check_numbers(sample[0].chars, sample[1].chars)).to eq(sample[2])
       end
     end
   end

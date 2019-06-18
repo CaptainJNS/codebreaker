@@ -15,7 +15,7 @@ class Game
 
   def check(number)
     @attempts -= 1
-    result = check_numbers(@secret, number)
+    result = check_numbers(@secret.chars, number.chars)
     @win = true if result == '++++'
     result
   end

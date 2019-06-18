@@ -13,9 +13,7 @@ RSpec.describe Game do
   describe '#use_hint' do
     it 'decrements hints and calls a hint method if hints > 0' do
       game.instance_variable_set(:@hints, 1)
-      # game.use_hint
       expect { game.use_hint }.to change(game, :hints).by(-1)
-      # expect(game.hints).to eq(0)
     end
 
     it 'returns a message if no hints left' do
