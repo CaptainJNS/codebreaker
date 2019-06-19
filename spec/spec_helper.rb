@@ -1,6 +1,7 @@
 require 'simplecov'
 require 'pry'
 require 'yaml'
+require 'codebreaker_captainjns'
 
 SimpleCov.start do
   add_filter '/spec/'

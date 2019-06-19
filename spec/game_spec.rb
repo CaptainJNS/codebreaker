@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 require_relative '../dependency'
-
+include CodebreakerCaptainjns
 RSpec.describe Game do
   subject(:game) { described_class.new(name: 'Rspec', difficulty: 'Easy') }
 

@@ -272,3 +272,38 @@
   att_used: 1
   hints_total: 3
   hints_used: 1
+- !ruby/object:TableRow
+  name: azazello
+  difficulty: Medium
+  att_total: 10
+  att_used: 6
+  hints_total: 2
+  hints_used: 2
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: Easy
+  att_total: 15
+  att_used: 1
+  hints_total: 3
+  hints_used: 1
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: Easy
+  att_total: 15
+  att_used: 1
+  hints_total: 3
+  hints_used: 1
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: Easy
+  att_total: 15
+  att_used: 1
+  hints_total: 3
+  hints_used: 1
+- !ruby/object:TableRow
+  name: Rspec
+  difficulty: Easy
+  att_total: 15
+  att_used: 1
+  hints_total: 3
+  hints_used: 1

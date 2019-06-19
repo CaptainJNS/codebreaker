@@ -3,6 +3,7 @@ class GameConsole
   include DataUtils
   include GameLogic
   include Output
+  include CodebreakerCaptainjns
 
   def initialize(name, difficulty)
     @game = Game.new(name: name, difficulty: difficulty)

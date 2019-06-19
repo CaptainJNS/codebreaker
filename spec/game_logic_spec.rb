@@ -2,6 +2,7 @@ require_relative 'spec_helper'
 require_relative '../dependency'
 
 RSpec.describe GameLogic do
+  include CodebreakerCaptainjns
   let(:dummy_class) { Class.new { extend GameLogic } }
 
   describe '.check_numbers' do
